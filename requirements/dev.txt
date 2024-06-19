@@ -1,0 +1,10 @@
+wheel
+fastapi==0.111.0
+addict
+SQLAlchemy==2.0.29
+aiomysql==0.2.0
+passlib[bcrypt]
+python-jose[cryptography]
+motor[srv]
+pillow
+pytesseract==0.3.10
