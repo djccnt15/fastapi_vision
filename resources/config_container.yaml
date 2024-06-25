@@ -1,0 +1,51 @@
+fastapi:
+  title: OCR Backend Server
+  version: 0.0.1
+  contact:
+    name: djccnt15
+    url: https://djccnt15.github.io/
+    email: djccnt15@gmail.com
+  license_info:
+    name: MIT
+    url: https://en.wikipedia.org/wiki/MIT_License
+  description: OCR Backend Server
+  openapi_tags:
+    - name: default
+      externalDocs:
+        description: External docs
+        url: https://djccnt15.github.io/pages/tags/#fastapi
+    - name: user
+      description: User domain API, Such as **SignUp**, **LogIn**, etc.
+    - name: ocr
+      description: OCR domain API
+  cors_origin:
+    - http://localhost:5173
+    - http://127.0.0.1:5173
+  auth:
+    token_expire_minutes: 1440
+    secret_key: secret_key
+    algorithm: algorithm
+
+db:
+  url:
+    drivername: mysql+aiomysql
+    username: qwer
+    password: asdf
+    host: host.docker.internal
+    port: 3306
+    database: test
+  engine:
+    pool_pre_ping: true
+    pool_recycle: 3600
+    echo: false
+
+mongodb:
+  uri: mongodb://host.docker.internal:27017
+  db:
+    name: ocr
+
+ocr:
+  tesseract_path: /usr/bin/tesseract
+  thumbnail:
+    width: 128
+    height: 128
