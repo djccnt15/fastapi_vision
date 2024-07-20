@@ -22,7 +22,7 @@ class Roi(BaseModel):
     y2: int
 
     @model_validator(mode="after")
-    def check_passwords_match(self) -> Self:
+    def validate_roi(self) -> Self:
         conditions = [
             min(self.x1, self.y1, self.x2, self.y2) < 0,
             self.x1 > self.x2,
