@@ -1,7 +1,16 @@
-# ocr_backend
-FastAPI 기반 OCR Backend 서버
+# Vision AI Service Backend with FastAPI
 
-## memo
+FastAPI 기반 OCR 및 비전 AI Backend 서버
+
+## Requirements
+
+- Python 3.11
+    - check `requirements` directory for third-party packages
+- MariaDB 11.1
+- MongoDB
+- Tesseract 5.4
+
+## Memo
 
 - commends for running FastAPI dev server
 
@@ -15,7 +24,7 @@ fastapi dev main.py
 main.py
 ```
 
-## alembic migration
+## Migration with Alembic
 
 - initialize alembic
 
@@ -40,11 +49,11 @@ alembic upgrade head
 - Dockerfile build
 
 ```
-docker build -t fastocr .
+docker build -t fast_vision .
 ```
 
 - Docker container run
 
 ```
-docker run -itd -p 8000:8000 --name fastocr fastocr
+docker run -itd -p 8000:8000 --name fast_vision fast_vision
 ```
