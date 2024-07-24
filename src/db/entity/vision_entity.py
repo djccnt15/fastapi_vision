@@ -10,21 +10,34 @@ from .enum.vision_enum import (
     ProdTypeEntityEnum,
     ResultEntityEnum,
     ResultTypeEntityEnum,
+    SideEntityEnum,
 )
 
 
 class ProdTypeEntity(BigintIdEntity):
     __tablename__ = "prod_type"
 
-    name: Mapped[str] = mapped_column(String(length=ProdTypeEntityEnum.NAME.value))
+    name: Mapped[str] = mapped_column(
+        String(length=ProdTypeEntityEnum.NAME.value),
+        unique=True,
+    )
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
 
 
 class DeftTypeEntity(BigintIdEntity):
     __tablename__ = "deft_type"
 
-    name: Mapped[str] = mapped_column(String(length=DeftTypeEntityEnum.NAME.value))
+    name: Mapped[str] = mapped_column(
+        String(length=DeftTypeEntityEnum.NAME.value),
+        unique=True,
+    )
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
+
+
+class SideEntity(BigintIdEntity):
+    __tablename__ = "side"
+
+    name: Mapped[str] = mapped_column(String(SideEntityEnum.NAME.value), unique=True)
 
 
 class ProdDeftEntity(BigintIdEntity):
@@ -32,6 +45,7 @@ class ProdDeftEntity(BigintIdEntity):
 
     prod_type_id: Mapped[int] = mapped_column(BigInteger, ForeignKey(ProdTypeEntity.id))
     deft_type_id: Mapped[int] = mapped_column(BigInteger, ForeignKey(DeftTypeEntity.id))
+    side_id: Mapped[int] = mapped_column(BigInteger, ForeignKey(SideEntity.id))
 
 
 class RoiEntity(BigintIdEntity):
@@ -62,14 +76,17 @@ class ResultEntity(BigintIdEntity):
     )
     spec: Mapped[dict] = mapped_column(JSON)
     created_datetime: Mapped[datetime] = mapped_column(DateTime)
+    prod_type_id: Mapped[int] = mapped_column(BigInteger, ForeignKey(ProdTypeEntity.id))
+    side_id: Mapped[int] = mapped_column(BigInteger, ForeignKey(SideEntity.id))
     result_type_id: Mapped[int] = mapped_column(
         BigInteger,
         ForeignKey(ResultTypeEntity.id),
     )
 
 
-class DeftHistoryEntity(BigintIdEntity):
-    __tablename__ = "deft_history"
+class DeftDetailEntity(BigintIdEntity):
+    __tablename__ = "deft_detail"
 
+    detail: Mapped[dict] = mapped_column(JSON)
     result_id: Mapped[int] = mapped_column(BigInteger, ForeignKey(ResultEntity.id))
     roi_id: Mapped[int] = mapped_column(BigInteger, ForeignKey(RoiEntity.id))

@@ -15,3 +15,7 @@ class ResultTypeEntityEnum(IntEnum):
 
 class ResultEntityEnum(IntEnum):
     SERIAL_NUM = 30
+
+
+class SideEntityEnum(IntEnum):
+    NAME = 30
