@@ -7,6 +7,7 @@ from sqlalchemy.types import JSON, BigInteger, Boolean, DateTime, Integer, Strin
 from . import BigintIdEntity
 from .enum.vision_enum import (
     DeftTypeEntityEnum,
+    DetectorEntityEnum,
     ProdTypeEntityEnum,
     ResultEntityEnum,
     ResultTypeEntityEnum,
@@ -34,6 +35,16 @@ class DeftTypeEntity(BigintIdEntity):
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
 
 
+class DetectorEntity(BigintIdEntity):
+    __tablename__ = "detector"
+
+    name: Mapped[str] = mapped_column(
+        String(DetectorEntityEnum.NAME.value),
+        unique=True,
+    )
+    is_active: Mapped[bool] = mapped_column(Boolean, default=True)
+
+
 class SideEntity(BigintIdEntity):
     __tablename__ = "side"
 
@@ -44,6 +55,7 @@ class ProdDeftEntity(BigintIdEntity):
     __tablename__ = "prod_deft"
 
     prod_type_id: Mapped[int] = mapped_column(BigInteger, ForeignKey(ProdTypeEntity.id))
+    detector_id: Mapped[int] = mapped_column(BigInteger, ForeignKey(DetectorEntity.id))
     deft_type_id: Mapped[int] = mapped_column(BigInteger, ForeignKey(DeftTypeEntity.id))
     side_id: Mapped[int] = mapped_column(BigInteger, ForeignKey(SideEntity.id))
 

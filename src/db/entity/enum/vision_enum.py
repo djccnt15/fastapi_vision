@@ -2,11 +2,15 @@ from enum import IntEnum
 
 
 class ProdTypeEntityEnum(IntEnum):
-    NAME = 100
+    NAME = 50
 
 
 class DeftTypeEntityEnum(IntEnum):
-    NAME = 100
+    NAME = 50
+
+
+class DetectorEntityEnum(IntEnum):
+    NAME = 50
 
 
 class ResultTypeEntityEnum(IntEnum):
@@ -14,8 +18,8 @@ class ResultTypeEntityEnum(IntEnum):
 
 
 class ResultEntityEnum(IntEnum):
-    SERIAL_NUM = 30
+    SERIAL_NUM = 100
 
 
 class SideEntityEnum(IntEnum):
-    NAME = 30
+    NAME = 50
