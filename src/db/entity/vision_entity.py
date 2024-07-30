@@ -11,7 +11,6 @@ from .enum.vision_enum import (
     ProdTypeEntityEnum,
     ResultEntityEnum,
     ResultTypeEntityEnum,
-    SideEntityEnum,
 )
 
 
@@ -45,19 +44,12 @@ class DetectorEntity(BigintIdEntity):
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
 
 
-class SideEntity(BigintIdEntity):
-    __tablename__ = "side"
-
-    name: Mapped[str] = mapped_column(String(SideEntityEnum.NAME.value), unique=True)
-
-
 class ProdDeftEntity(BigintIdEntity):
     __tablename__ = "prod_deft"
 
     prod_type_id: Mapped[int] = mapped_column(BigInteger, ForeignKey(ProdTypeEntity.id))
     detector_id: Mapped[int] = mapped_column(BigInteger, ForeignKey(DetectorEntity.id))
     deft_type_id: Mapped[int] = mapped_column(BigInteger, ForeignKey(DeftTypeEntity.id))
-    side_id: Mapped[int] = mapped_column(BigInteger, ForeignKey(SideEntity.id))
 
 
 class RoiEntity(BigintIdEntity):
@@ -89,7 +81,6 @@ class ResultEntity(BigintIdEntity):
     spec: Mapped[dict] = mapped_column(JSON)
     created_datetime: Mapped[datetime] = mapped_column(DateTime)
     prod_type_id: Mapped[int] = mapped_column(BigInteger, ForeignKey(ProdTypeEntity.id))
-    side_id: Mapped[int] = mapped_column(BigInteger, ForeignKey(SideEntity.id))
     result_type_id: Mapped[int] = mapped_column(
         BigInteger,
         ForeignKey(ResultTypeEntity.id),
