@@ -13,6 +13,7 @@ from .inferencer import TesseractInferencer
 from .ocr import MongoOcrRepository
 from .ocr_meta import RdbOcrRepository
 from .user import RdbUserRepository
+from .vision import RdbVisionRepository
 
 config = configs.config
 
@@ -50,6 +51,10 @@ async def get_user_repo(db: RepoSession) -> RdbUserRepository:
 
 async def get_ocr_meta_repo(db: RepoSession) -> RdbOcrRepository:
     return RdbOcrRepository(db=db)
+
+
+async def get_vision_repo(db: RepoSession) -> RdbVisionRepository:
+    return RdbVisionRepository(db=db)
 
 
 tesseract = TesseractInferencer(path=config.ocr.tesseract_path)

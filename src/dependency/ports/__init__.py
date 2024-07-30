@@ -3,3 +3,4 @@ from .inferencer import *
 from .ocr import *
 from .ocr_meta import *
 from .user import *
+from .vision import *
