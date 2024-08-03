@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import NamedTuple, Self
 
 from fastapi import HTTPException
-from pydantic import BaseModel, model_validator
+from pydantic import BaseModel, Field, model_validator
 from starlette import status
 
 
@@ -16,22 +16,21 @@ class OcrResultMeta(NamedTuple):
 
 
 class Roi(BaseModel):
-    x1: int
-    y1: int
-    x2: int
-    y2: int
+    x1: int = Field(ge=0)
+    y1: int = Field(ge=0)
+    x2: int = Field(gt=0)
+    y2: int = Field(gt=0)
 
     @model_validator(mode="after")
     def validate_roi(self) -> Self:
         conditions = [
-            min(self.x1, self.y1, self.x2, self.y2) < 0,
             self.x1 > self.x2,
             self.y1 > self.y2,
         ]
         if any(conditions):
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
-                detail="roi error",
+                detail="roi validation error",
             )
         return self
 
