@@ -28,7 +28,7 @@ class MongoImageRepository(ImageRepository):
 
     async def upload_thumbnail(self, *, data: dict) -> str:
         inserted_id = await self.thumbnail_collection.insert_one(document=data)
-        return str(inserted_id)
+        return inserted_id.inserted_id
 
     async def download_image(self, *, file_id: str) -> Any:
         grid_out = await self.bucket.open_download_stream(file_id=ObjectId(file_id))

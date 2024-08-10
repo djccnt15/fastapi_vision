@@ -18,8 +18,8 @@ class OcrResultMeta(NamedTuple):
 class Roi(BaseModel):
     x1: int = Field(ge=0)
     y1: int = Field(ge=0)
-    x2: int = Field(gt=0)
-    y2: int = Field(gt=0)
+    x2: int = Field(ge=0)
+    y2: int = Field(ge=0)
 
     @model_validator(mode="after")
     def validate_roi(self) -> Self:
