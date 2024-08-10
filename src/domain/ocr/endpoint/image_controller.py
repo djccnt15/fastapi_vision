@@ -8,7 +8,6 @@ from starlette import status
 from src import dependency
 from src.core import auth
 from src.core.model.enums import ResponseEnum
-from src.dependency import adapters, ports
 
 from ..business import image_process, ocr_process
 from ..model import ocr_model, ocr_request, ocr_response
@@ -118,7 +117,7 @@ async def run_image_ocr(
     meta_repo: dependency.MetaRepo,
     image_repo: dependency.ImageRepo,
     ocr_repo: dependency.OcrRepo,
-    inferencer: Annotated[ports.OcrInferencer, Depends(adapters.get_ocr_inferencer)],
+    inferencer: dependency.OcrInferencer,
     id: Annotated[int, Path(gt=0)],
     body: Annotated[list[ocr_model.Roi], Body()],
     lang: Annotated[list[ocr_enum.OcrLangEnum], Query()] = [ocr_enum.OcrLangEnum.ENG],
