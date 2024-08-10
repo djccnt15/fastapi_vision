@@ -80,7 +80,7 @@ class ResultEntity(BigintIdEntity):
     )
     spec: Mapped[dict] = mapped_column(JSON)
     created_datetime: Mapped[datetime] = mapped_column(DateTime)
-    prod_type_id: Mapped[int] = mapped_column(BigInteger, ForeignKey(ProdTypeEntity.id))
+    prod_deft_id: Mapped[int] = mapped_column(BigInteger, ForeignKey(ProdDeftEntity.id))
     result_type_id: Mapped[int] = mapped_column(
         BigInteger,
         ForeignKey(ResultTypeEntity.id),
@@ -90,6 +90,9 @@ class ResultEntity(BigintIdEntity):
 class DeftDetailEntity(BigintIdEntity):
     __tablename__ = "deft_detail"
 
+    x1: Mapped[int] = mapped_column(Integer)
+    y1: Mapped[int] = mapped_column(Integer)
+    x2: Mapped[int] = mapped_column(Integer)
+    y2: Mapped[int] = mapped_column(Integer)
     detail: Mapped[dict] = mapped_column(JSON)
     result_id: Mapped[int] = mapped_column(BigInteger, ForeignKey(ResultEntity.id))
-    roi_id: Mapped[int] = mapped_column(BigInteger, ForeignKey(RoiEntity.id))
