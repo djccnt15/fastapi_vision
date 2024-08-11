@@ -1,3 +1,4 @@
+from contextlib import asynccontextmanager
 from typing import Annotated
 
 from fastapi import Depends
@@ -89,3 +90,12 @@ async def get_image_repo(db: BlobClient) -> MongoImageRepository:
 
 async def get_ocr_repo(db: BlobClient) -> MongoOcrRepository:
     return MongoOcrRepository(db=db)
+
+
+@asynccontextmanager
+async def get_async_db():
+    db = AsyncSession(bind=db_engine)
+    try:
+        yield db
+    finally:
+        await db.close()
